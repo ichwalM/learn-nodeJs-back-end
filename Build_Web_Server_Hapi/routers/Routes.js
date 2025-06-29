@@ -31,15 +31,13 @@ const routes = [
         method: 'GET',
         path: '/hello/{name?}',
         handler: (request, h) => {
-            const { name = "all" } = request.params;
+            const { name = "stranger" } = request.params;
+            const { lang } = request.query;
+    
+            if(lang === 'id') {
+                return `Hai, ${name}!`;
+            }
             return `Hello, ${name}!`;
-        },
-    },
-    {
-        method: '*',
-        path: '/{any*}',
-        handler: (request, h) => {
-            return 'Halaman tidak ditemukan';
         },
     },
 ];
