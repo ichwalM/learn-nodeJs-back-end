@@ -29,12 +29,19 @@ const routes = [
     },
     {
         method: 'GET',
+        path: '/contact',
+        handler: (request, h) => {
+            return 'Contact page';
+        }
+    },
+    {
+        method: 'GET',
         path: '/hello/{name?}',
         handler: (request, h) => {
-            const { name = "stranger" } = request.params;
+            const { name = 'stranger' } = request.params;
             const { lang } = request.query;
-    
-            if(lang === 'id') {
+
+            if (lang === 'id') {
                 return `Hai, ${name}!`;
             }
             return `Hello, ${name}!`;
