@@ -1,8 +1,8 @@
 const Joi = require('@hapi/joi');
-const handleValidation = Joi.object({
+const handleValidationPost = Joi.object({
     name: Joi.string().required().messages({
-        'any.required': 'Gagal memperbarui buku. Mohon isi nama buku', 
-        'string.empty': 'Gagal memperbarui buku. Mohon isi nama buku',
+        'any.required': 'Gagal menambahkan buku. Mohon isi nama buku', 
+        'string.empty': 'Gagal menambahkan buku. Mohon isi nama buku', 
     }),
     year: Joi.number().integer().required().messages({
         'any.required': 'Gagal menambahkan buku. Mohon isi tahun buku',
@@ -30,4 +30,21 @@ const handleValidation = Joi.object({
     reading: Joi.boolean().default(false),  
 });
 
-module.exports = {handleValidation};
+const handleValidationPut = Joi.object({
+    name: Joi.string().required().messages({
+        'any.required': 'Gagal memperbarui buku. Mohon isi nama buku', 
+        'string.empty': 'Gagal memperbarui buku. Mohon isi nama buku', 
+    }),
+    year: Joi.number().integer().min(1000).optional().messages({
+        'number.base': 'Gagal memperbarui buku. Tahun harus berupa angka',
+        'number.integer': 'Gagal memperbarui buku. Tahun harus berupa bilangan bulat',
+        'number.min': 'Gagal memperbarui buku. Tahun terlalu kuno',
+    }),
+    author: Joi.string().optional().messages({
+        'string.empty': 'Gagal memperbarui buku. Mohon isi nama penulis',
+    }),
+    
+});
+
+
+module.exports = {handleValidationPost, handleValidationPut};
